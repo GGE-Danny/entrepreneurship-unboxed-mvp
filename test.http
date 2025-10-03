@@ -3,10 +3,11 @@
 POST http://127.0.0.1:5000/match?rank=true
 Content-Type: application/json
 
-{
-  "industry": "Fintech",
-  "stage": "Seed",
-  "funding_amount": 100000
+{ 
+"industry": "Fintech", 
+"stage": "Seed", 
+"min_funding": 100000, 
+"max_funding": 500000  
 }
 
 ### List investors
