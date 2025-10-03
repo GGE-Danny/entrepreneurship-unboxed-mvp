@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Founder Dashboard</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        margin: 2rem;
+      }
+
+      .card {
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .muted {
+        color: #6b7280;
+      }
+
+      input,
+      select,
+      button {
+        padding: 0.6rem 0.8rem;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+        margin: 0.3rem;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 1rem;
+      }
+
+      th,
+      td {
+        border: 1px solid #e5e7eb;
+        padding: 0.6rem;
+        text-align: left;
+      }
+
+      th {
+        background: #f9fafb;
+      }
+
+      .score-bar {
+        height: 12px;
+        border-radius: 6px;
+        background: #e5e7eb;
+        /* light gray background */
+        overflow: hidden;
+      }
+
+      .score-fill {
+        height: 100%;
+      }
+
+      .score-low {
+        background: #ef4444;
+      }
+
+      /* red */
+      .score-mid {
+        background: #facc15;
+      }
+
+      /* yellow */
+      .score-high {
+        background: #22c55e;
+      }
+
+      /* green */
+    </style>
+  </head>
+
+  <body>
+    <h1>Founder Dashboard</h1>
+    <div class="card">
+      <h2>Startup health</h2>
+      <p><strong>Name:</strong> {{ data.startup_name }}</p>
+      <p><strong>Status:</strong> {{ data.health }}</p>
+      <p><strong>Next Action:</strong> {{ data.next_action }}</p>
+    </div>
+
+    <div class="card">
+      <h2>Find Matching Investors</h2>
+      <form id="matchForm">
+        <label
+          >Industry:
+          <select name="industry">
+            {% for ind in industries %}
+            <option value="{{ ind }}">{{ ind }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label
+          >Stage:
+          <select name="stage">
+            {% for st in stages %}
+            <option value="{{ st }}">{{ st }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label
+          >Min Funding (USD):
+          <input name="min_funding" type="number" placeholder="No minimum" />
+        </label>
+
+        <label
+          >Max Funding (USD):
+          <input name="max_funding" type="number" placeholder="No maximum" />
+        </label>
+
+        <label
+          >Rank by relevance:
+          <input name="rank" type="checkbox" />
+        </label>
+
+        <button type="submit">Search</button>
+      </form>
+
+      <div id="result"></div>
+    </div>
+
+    <script>
+      const form = document.getElementById("matchForm");
+      const resultEl = document.getElementById("result");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const payload = {
+          industry: formData.get("industry"),
+          stage: formData.get("stage"),
+          min_funding: formData.get("min_funding")
+            ? Number(formData.get("min_funding"))
+            : null,
+          max_funding: formData.get("max_funding")
+            ? Number(formData.get("max_funding"))
+            : null,
+        };
+
+        const rank = formData.get("rank") === "on";
+        const resp = await fetch("/match?rank=" + rank, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await resp.json();
+        if (!data.ok) {
+          resultEl.innerHTML =
+            '<p style="color:#b91c1c">Error: ' +
+            JSON.stringify(data.errors) +
+            "</p>";
+          return;
+        }
+        const rows = (data.matches || [])
+          .map((m) => {
+            let scoreCell = "";
+            if (m.score !== undefined) {
+              // pick color class
+              let colorClass = "score-low";
+              if (m.score >= 0.7) {
+                colorClass = "score-high";
+              } else if (m.score >= 0.4) {
+                colorClass = "score-mid";
+              }
+
+              scoreCell = `<td>
+      <div class="score-bar">
+        <div class="score-fill ${colorClass}" style="width:${
+                m.score * 100
+              }%"></div>
+      </div>
+      <small>${m.score}</small>
+    </td>`;
+            }
+
+            return `<tr>
+    <td>${m.name}</td>
+    <td>${m.industry}</td>
+    <td>${m.stage}</td>
+    <td>${m.min_investment}</td>
+    <td>${m.max_investment}</td>
+    ${scoreCell}
+  </tr>`;
+          })
+          .join("");
+
+        const scoreTh = data.ranked ? "<th>Score</th>" : "";
+        resultEl.innerHTML = `
+        <table>
+          <thead><tr><th>Name</th><th>Industry</th><th>Stage</th><th>Min</th><th>Max</th>${scoreTh}</tr></thead>
+          <tbody>${rows || '<tr><td colspan="6">No matches.</td></tr>'}</tbody>
+        </table>`;
+      });
+    </script>
+  </body>
+</html>

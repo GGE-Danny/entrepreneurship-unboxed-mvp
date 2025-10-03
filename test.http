@@ -1,0 +1,13 @@
+
+### Match investors (ranked)
+POST http://127.0.0.1:5000/match?rank=true
+Content-Type: application/json
+
+{
+  "industry": "Fintech",
+  "stage": "Seed",
+  "funding_amount": 100000
+}
+
+### List investors
+GET http://127.0.0.1:5000/investors

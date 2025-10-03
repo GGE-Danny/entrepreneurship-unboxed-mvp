@@ -1,0 +1,156 @@
+[
+  {
+    "name": "Seed Ventures",
+    "industry": "Fintech",
+    "min_investment": 50000,
+    "max_investment": 500000,
+    "stage": "Seed"
+  },
+    {
+    "name": "Seed Ventures1",
+    "industry": "Fintech",
+    "min_investment": 20000,
+    "max_investment": 500000,
+    "stage": "Seed"
+  },
+    {
+    "name": "Seed Ventures2",
+    "industry": "Fintech",
+    "min_investment": 10000,
+    "max_investment": 500000,
+    "stage": "Seed"
+  },
+  {
+    "name": "Growth Capital",
+    "industry": "Medicine",
+    "min_investment": 100000,
+    "max_investment": 2000000,
+    "stage": "Series A"
+  },
+  {
+    "name": "Angel Collective",
+    "industry": "Medicine",
+    "min_investment": 10000,
+    "max_investment": 100000,
+    "stage": "Pre-Seed"
+  },
+  {
+    "name": "Frontier Angels",
+    "industry": "Fintech",
+    "min_investment": 25000,
+    "max_investment": 150000,
+    "stage": "Pre-Seed"
+  },
+  {
+    "name": "Scale Partners",
+    "industry": "Fintech",
+    "min_investment": 200000,
+    "max_investment": 2000000,
+    "stage": "Series A"
+  },
+  {
+    "name": "EduTech Angels",
+    "industry": "Edtech",
+    "min_investment": 20000,
+    "max_investment": 120000,
+    "stage": "Pre-Seed"
+  },
+  {
+    "name": "Bright Future Fund",
+    "industry": "Edtech",
+    "min_investment": 100000,
+    "max_investment": 750000,
+    "stage": "Seed"
+  },
+  {
+    "name": "Health First Ventures",
+    "industry": "Healthtech",
+    "min_investment": 50000,
+    "max_investment": 300000,
+    "stage": "Seed"
+  },
+  {
+    "name": "Global Impact Fund",
+    "industry": "Clean Energy",
+    "min_investment": 250000,
+    "max_investment": 5000000,
+    "stage": "Series B"
+  },
+  {
+    "name": "Urban Growth Partners",
+    "industry": "Real Estate",
+    "min_investment": 150000,
+    "max_investment": 1500000,
+    "stage": "Series A"
+  },
+  {
+    "name": "AgriFund Alliance",
+    "industry": "Agritech",
+    "min_investment": 50000,
+    "max_investment": 800000,
+    "stage": "Seed"
+  },
+  {
+    "name": "Future Mobility Capital",
+    "industry": "Transport",
+    "min_investment": 100000,
+    "max_investment": 2500000,
+    "stage": "Series A"
+  },
+  {
+    "name": "AI Pioneers",
+    "industry": "Artificial Intelligence",
+    "min_investment": 30000,
+    "max_investment": 300000,
+    "stage": "Seed"
+  },
+  {
+    "name": "CyberSecure Ventures",
+    "industry": "Cybersecurity",
+    "min_investment": 100000,
+    "max_investment": 1000000,
+    "stage": "Series A"
+  },
+  {
+    "name": "Retail Disruptors Fund",
+    "industry": "E-commerce",
+    "min_investment": 75000,
+    "max_investment": 500000,
+    "stage": "Seed"
+  },
+  {
+    "name": "Green Planet Capital",
+    "industry": "Sustainability",
+    "min_investment": 50000,
+    "max_investment": 1000000,
+    "stage": "Series A"
+  },
+  {
+    "name": "CloudScale Investors",
+    "industry": "SaaS",
+    "min_investment": 120000,
+    "max_investment": 2000000,
+    "stage": "Series A"
+  },
+  {
+    "name": "Visionary Ventures",
+    "industry": "VR/AR",
+    "min_investment": 40000,
+    "max_investment": 400000,
+    "stage": "Seed"
+  },
+  {
+    "name": "BioTech Growth Fund",
+    "industry": "Biotech",
+    "min_investment": 200000,
+    "max_investment": 5000000,
+    "stage": "Series B"
+  },
+  {
+    "name": "NextGen Media Fund",
+    "industry": "Media",
+    "min_investment": 30000,
+    "max_investment": 250000,
+    "stage": "Seed"
+  }
+]
